@@ -3,6 +3,7 @@
 from motion import PIR
 from pycreate2 import Create2
 import time
+from copy import deepcopy
 import RPi.GPIO as GPIO
 
 
@@ -14,17 +15,17 @@ class ScaredyBot():
 
     def __init__(self, tty):
         self.botPort = tty  # where is your serial port?
-        self.bot = Create2(self.botPort)
+        self.create2 = Create2(self.botPort)
         self.pir = PIR()
 
-        self.bot.start()
-        self.bot.safe()
+        self.create2.start()
+        self.create2.safe()
 
-        self.state = {}
+        self.state = {'motion':False}
         self.setState()
 
     def stop(self):
-        self.bot.drive_stop()
+        self.create2.drive_stop()
 
     # driving the bot - speed between 0 & 3; direction is 'forward' or 'back'
     def drive(self, speed = 1, dir = 'forward'):
@@ -36,13 +37,13 @@ class ScaredyBot():
         if direction=="back":
             speed = speed*-1
 
-        self.bot.drive_direct(speed, speed)
+        self.create2.drive_direct(speed, speed)
         noWall = True
         while noWall:
-            sensors = self.bot.get_sensors()
+            sensors = self.create2.get_sensors()
             bump = sensors.light_bumper
             if bump.front_left or bump.front_right:
-                self.bot.drive_stop()
+                self.create2.drive_stop()
                 noWall = False
 
     def driveOne(self, speed = 1, dir = 'forward'):
@@ -60,14 +61,19 @@ class ScaredyBot():
     def setState(self):
         try:
             # self.state = {'bot': self.bot.get_sensors(), 'pi': piSensors.getSensors()}
-            self.state = self.bot.get_sensors()
+
+            self.state = deepcopy(self.create2.get_sensors())
             self.state["motion"] = self.pir.getMotion()
             return True
         except:
             return False
 
-    def getSensors(self):
+    def getSensors(self, output = False):
         self.setState()
+
+        if output:
+            print(self.state)
+
         return self.state
 
     def checkMotion(self):
@@ -91,13 +97,10 @@ if __name__ == '__main__':
 
     scaredyBot = ScaredyBot('/dev/ttyUSB0')
     try:
-        print(scaredyBot.getSensors())
+        print(scaredyBot.checkMotion())
         time.sleep(.1)
         scaredyBot.driveUntilYouHitAWall(1)
-        #bot = Create2(port)
-        #print(bot.get_sensors())
-        #scaredyBot.start()
-        #loop()
+
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
         destroy()
 
