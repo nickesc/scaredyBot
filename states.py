@@ -16,9 +16,8 @@ class _start():
         return "start"
 
     def enter(_state):
-        _state.scaredyBot.speed = 0
         print('entering', _state.scaredyBot.getState())
-
+        _state.scaredyBot.speed = 0
 
     def execute(_state):
         return
@@ -35,8 +34,9 @@ class _searching():
         return "searching"
 
     def enter(_state):
-        _state.scaredyBot.speed = 75
         print('entering', _state.scaredyBot.getState())
+        _state.scaredyBot.speed = 75
+        _state.scaredyBot.pir.light.red()
 
     def execute(_state):
         sense = _state.scaredyBot.getSensors(True)
@@ -57,11 +57,13 @@ class _running():
         return "running"
 
     def enter(_state):
-        _state.scaredyBot.speed = 250
         print('entering', _state.scaredyBot.getState())
+        _state.scaredyBot.speed = 250
+        _state.scaredyBot.pir.light.red()
+
 
     def execute(_state):
-        time.sleep(3)
+        time.sleep(4)
         if _state.scaredyBot.looped<_state.scaredyBot.maxLoops:
             _state.scaredyBot.changeState(_searching(_state.scaredyBot))
             _state.scaredyBot.looped += 1
@@ -81,8 +83,9 @@ class _end():
         return "end"
 
     def enter(_state):
-        _state.scaredyBot.speed = 0
         print('entering', _state.scaredyBot.getState())
+        _state.scaredyBot.speed = 0
+        _state.scaredyBot.stop()
         _state.exit()
 
     def execute(_state):

@@ -3,7 +3,7 @@
 try:
     import RPi.GPIO as GPIO
     from motion import PIR
-    from pycreate2 import Create2
+    #from pycreate2 import Create2
 except:
     from motionDummy import PIR
     from create2Dummy import Create2
@@ -15,7 +15,7 @@ from states import _start, _searching, _running, _end
 
 port = '/dev/ttyUSB0'
 
-class ScaredyBot():
+class ScaredyBot:
 
     baseSpeed = 100
     state = None
@@ -50,7 +50,7 @@ class ScaredyBot():
 
     def loop(self):
         self.state.execute()
-        time.sleep(.1)
+        time.sleep(.01)
         self.loop()
 
 
@@ -116,6 +116,7 @@ class ScaredyBot():
         print("Quitting")
         try:
             GPIO.cleanup()
+            self.pir.cleanup()
         except:
             pass
         self.create2.close()
