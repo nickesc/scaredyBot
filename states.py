@@ -18,6 +18,8 @@ class _start():
     def enter(_state):
         print('entering', _state.scaredyBot.getState())
         _state.scaredyBot.speed = 0
+        _state.scaredyBot.pir.light.blue()
+        time.sleep(.5)
 
     def execute(_state):
         return
@@ -36,7 +38,7 @@ class _searching():
     def enter(_state):
         print('entering', _state.scaredyBot.getState())
         _state.scaredyBot.speed = 75
-        _state.scaredyBot.pir.light.red()
+        _state.scaredyBot.pir.light.green()
 
     def execute(_state):
         sense = _state.scaredyBot.getSensors(True)
@@ -93,4 +95,6 @@ class _end():
 
     def exit(_state):
         print('exiting', _state.scaredyBot.getState())
+        _state.scaredyBot.pir.light.blue()
+        time.sleep(.5)
         _state.scaredyBot.destroy()

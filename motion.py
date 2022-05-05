@@ -22,9 +22,9 @@ class PIR:
             b = bPin
 
             GPIO.setmode(GPIO.BCM)
-            #GPIO.setup(r, GPIO.OUT)
-            #GPIO.setup(g, GPIO.OUT)
-            #GPIO.setup(b, GPIO.OUT)
+            GPIO.setup(r, GPIO.OUT)
+            GPIO.setup(g, GPIO.OUT)
+            GPIO.setup(b, GPIO.OUT)
 
             light.p_R = GPIO.PWM(r, 2000)
             light.p_G = GPIO.PWM(g, 2000)
