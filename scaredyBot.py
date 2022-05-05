@@ -1,97 +1,33 @@
 #!/usr/bin/env python3
 
-from motion import PIR
-#from pycreate2 import Create2
-from create2Dummy import Create2
+try:
+    import RPi.GPIO as GPIO
+    from motion import PIR
+    from pycreate2 import Create2
+except:
+    from motionDummy import PIR
+    from create2Dummy import Create2
+
+import sys
 import time
 from copy import deepcopy
-import RPi.GPIO as GPIO
-
+from states import _start, _searching, _running, _end
 
 port = '/dev/ttyUSB0'
-
-
-class _start():
-    def __init__(_state, scaredyBot):
-        _state.scaredyBot = scaredyBot
-
-    def getName(_state):
-        return "start"
-
-    def enter(_state):
-        print('entering', _state.scaredyBot.getState())
-
-    def execute(_state):
-        return
-
-    def exit(_state):
-        print('exiting', _state.scaredyBot.getState())
-
-
-class _running():
-    def __init__(_state, scaredyBot):
-        _state.scaredyBot = scaredyBot
-
-    def getName(_state):
-        return "running"
-
-    def enter(_state):
-        print('entering', _state.scaredyBot.getState())
-
-    def execute(_state):
-        time.sleep(5)
-        _state.scaredyBot.changeState(_end(_state.scaredyBot))
-        return
-
-    def exit(_state):
-        print('exiting', _state.scaredyBot.getState())
-
-
-class _searching():
-
-    def __init__(_state, scaredyBot):
-        _state.scaredyBot = scaredyBot
-
-    def getName(_state):
-        return "end"
-
-    def enter(_state):
-        print('entering', _state.scaredyBot.getState())
-
-    def execute(_state):
-        while(_state.scaredyBot.getSensors()['motion']!=True):
-            pass
-        _state.scaredyBot.changeState(_running(_state.scaredyBot))
-
-    def exit(_state):
-        print('exiting', _state.scaredyBot.getState())
-
-
-class _end():
-
-    def __init__(_state, scaredyBot):
-        _state.scaredyBot = scaredyBot
-
-    def getName(_state):
-        return "end"
-
-    def enter(_state):
-        print('entering', _state.scaredyBot.getState())
-
-    def execute(_state):
-        return
-
-    def exit(_state):
-        print('exiting', _state.scaredyBot.getState())
-        _state.scaredyBot.destroy()
 
 class ScaredyBot():
 
     baseSpeed = 100
     state = None
 
+    motion = False
+
+    looped = 0
+    maxLoops = 10
+
     def __init__(self, tty):
         self.state = _start(self)
+        self.state.enter()
 
         self.botPort = tty  # where is your serial port?
         self.create2 = Create2(self.botPort)
@@ -117,10 +53,9 @@ class ScaredyBot():
         time.sleep(.1)
         self.loop()
 
+
     def getState(self):
         return self.state.getName()
-
-
 
     def stop(self):
         self.create2.drive_stop()
@@ -129,7 +64,8 @@ class ScaredyBot():
     def drive(self, speed = 1, dir = 'forward'):
         return
 
-    def driveUntilYouHitAWall(self, speed, direction = 'forward'):
+    def driveUntilWall(self, speed, direction = 'forward'):
+
         speed=speed*self.baseSpeed
 
         if direction=="back":
@@ -158,10 +94,8 @@ class ScaredyBot():
 
     def setSensors(self):
         try:
-            # self.state = {'bot': self.bot.get_sensors(), 'pi': piSensors.getSensors()}
-
-            self.sensors = dict(self.create2.get_sensors()._asdict())
-            self.sensors["motion"] = self.pir.getMotion()
+            self.sensors = self.create2.get_sensors()
+            self.motion = self.pir.getMotion()
             return True
         except:
             return False
@@ -170,18 +104,22 @@ class ScaredyBot():
         self.setSensors()
 
         if output:
-            print(self.sensors)
+            print(self.sensors, "\nMotion:", self.motion)
 
         return self.sensors
 
     def checkMotion(self):
-        return self.pir.getMotion()
+        self.motion = self.pir.getMotion()
+        return self.motion
 
     def destroy(self):
         print("Quitting")
-        GPIO.cleanup()
+        try:
+            GPIO.cleanup()
+        except:
+            pass
         self.create2.close()
-        quit()
+        sys.exit()
 
 if __name__ == '__main__':
 

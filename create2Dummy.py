@@ -1,4 +1,4 @@
-import random
+#!/usr/bin/env python3
 
 from packetsDummy import SensorPacketDecoder
 
