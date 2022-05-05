@@ -18,7 +18,6 @@ class _start():
     def enter(_state):
         print('entering', _state.scaredyBot.getState())
         _state.scaredyBot.speed = 0
-        _state.scaredyBot.pir.light.blue()
         time.sleep(.5)
 
     def execute(_state):
@@ -95,6 +94,5 @@ class _end():
 
     def exit(_state):
         print('exiting', _state.scaredyBot.getState())
-        _state.scaredyBot.pir.light.blue()
         time.sleep(.5)
         _state.scaredyBot.destroy()

@@ -115,7 +115,6 @@ class ScaredyBot:
     def destroy(self):
         print("Quitting")
         try:
-            GPIO.cleanup()
             self.pir.cleanup()
         except:
             pass
