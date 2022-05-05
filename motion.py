@@ -16,9 +16,19 @@ class PIR:
         colors = {'red' : 0xFF0000, 'green' : 0x00FF00, 'blue' : 0x0000FF}
 
         def __init__(light, rPin = 13, gPin = 19, bPin = 26):
-            light.p_R = GPIO.PWM(rPin, 2000)
-            light.p_G = GPIO.PWM(gPin, 2000)
-            light.p_B = GPIO.PWM(bPin, 2000)
+
+            r = rPin
+            g = gPin
+            b = bPin
+
+            GPIO.setmode(GPIO.BCM)
+            #GPIO.setup(r, GPIO.OUT)
+            #GPIO.setup(g, GPIO.OUT)
+            #GPIO.setup(b, GPIO.OUT)
+
+            light.p_R = GPIO.PWM(r, 2000)
+            light.p_G = GPIO.PWM(g, 2000)
+            light.p_B = GPIO.PWM(b, 2000)
             light.p_R.start(0)
             light.p_G.start(0)
             light.p_B.start(0)

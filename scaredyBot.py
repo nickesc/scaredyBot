@@ -6,7 +6,7 @@ try:
     #from pycreate2 import Create2
 except:
     from motionDummy import PIR
-    from create2Dummy import Create2
+from create2Dummy import Create2
 
 import sys
 import time
