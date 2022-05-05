@@ -40,7 +40,7 @@ class _running():
 
     def execute(_state):
         time.sleep(5)
-        scaredyBot.changeState(_end(scaredyBot))
+        _state.scaredyBot.changeState(_end(_state.scaredyBot))
         return
 
     def exit(_state):
@@ -59,8 +59,9 @@ class _searching():
         print('entering', _state.scaredyBot.getState())
 
     def execute(_state):
-        time.sleep(5)
-        scaredyBot.changeState(_running(scaredyBot))
+        while(_state.scaredyBot.getSensors()['motion']!=True):
+            pass
+        _state.scaredyBot.changeState(_running(_state.scaredyBot))
 
     def exit(_state):
         print('exiting', _state.scaredyBot.getState())
@@ -82,7 +83,7 @@ class _end():
 
     def exit(_state):
         print('exiting', _state.scaredyBot.getState())
-        scaredyBot.destroy()
+        _state.scaredyBot.destroy()
 
 class ScaredyBot():
 
