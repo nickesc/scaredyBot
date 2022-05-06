@@ -43,7 +43,7 @@ class ScaredyBot:
         bot.pir = PIR()
 
         bot.create2.start()
-        bot.create2.safe()
+        bot.create2.full()
 
         bot.sensors = {'angle':0}
         bot.setSensors()
