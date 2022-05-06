@@ -118,10 +118,11 @@ class _running():
                 _state.currAngle += _state.scaredyBot.checkAngle()
 
         elif _state.phase == _state.phases['running']:
-
+            bump = _state.scaredyBot.getSensors()['light_bumper']
+            print(bump)
             if not _state.wall:
                 bump = _state.scaredyBot.getSensors()['light_bumper']
-                print(bump)
+                #print(bump)
                 if bump.front_left or bump.front_right:
                     _state.wall = True
 
