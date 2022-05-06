@@ -65,9 +65,17 @@ class _searching():
 
 class _running():
 
+    rotating = True
+    running = False
+    waiting = False
+
     turnDir = 'left'
     goalAngle = 120
     currAngle = 0
+
+
+    startTime = 0
+    endTime = 11
 
     def __init__(_state, scaredyBot):
         _state.scaredyBot = scaredyBot
@@ -87,9 +95,27 @@ class _running():
 
 
     def execute(_state):
-
+        currTime = time.time()
         if _state.currAngle >= _state.goalAngle:
             _state.scaredyBot.stop()
+            _state.rotating = False
+        elif _state.currAngle < _state.goalAngle:
+            _state.currAngle +=_state.scaredyBot.checkAngle()
+
+        if _state.rotating == False and _state.running == False and _state.waiting == False:
+            _state.startTime = currTime
+            _state.endTime += currTime
+            _state.scaredyBot.drive(speed = .1)
+            _state.running = True
+
+        if _state.running and _state.endTime-6 == currTime:
+            _state.scaredyBot.stop()
+            _state.running = False
+            _state.waiting = True
+
+        if _state.waiting and _state.endTime == currTime:
+            pass
+
 
 
         if _state.scaredyBot.looped<_state.scaredyBot.maxLoops:
