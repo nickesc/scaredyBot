@@ -123,6 +123,7 @@ class _running():
                 if _state.scaredyBot.wallRight and _state.scaredyBot.wallLeft:
                     _state.turnDir = _state.scaredyBot.randDir()
                     _state.goalAngle = random.randint(100, 260)
+                _state.currAngle = 0
                 _state.startTime = currTime
                 _state.endTime = _state.startTime + 23
                 _state.newRotate = False
@@ -132,7 +133,7 @@ class _running():
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['running']
                 _state.startTime = currTime
-                _state.endTime += currTime
+                #_state.endTime += currTime
                 _state.scaredyBot.drive()
 
             elif abs(_state.currAngle) < _state.goalAngle:
