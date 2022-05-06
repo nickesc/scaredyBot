@@ -68,6 +68,7 @@ class _running():
     phases = {'rotating':'rotating','running':'running','waiting':'waiting', 'done':'done'}
     phase = 'rotating'
 
+    firstRotate = True
     newRotate = True
     rotating = True
     running = False
@@ -96,7 +97,7 @@ class _running():
         _state.goalAngle = random.randint(100,260)
 
         print('entering', _state.scaredyBot.getState())
-        _state.scaredyBot.baseSpeed = 500
+        _state.scaredyBot.baseSpeed = 400
         _state.scaredyBot.pir.light.red()
 
 
@@ -109,6 +110,10 @@ class _running():
         print('end', _state.endTime)
 
         if _state.phase == _state.phases['rotating']:
+            if _state.firstRotate == True:
+                _state.firstRotate = False
+                _state.endTime = _state.endTime + currTime
+
             if _state.newRotate:
                 bump = _state.scaredyBot.checkBump()
                 print(bump)
@@ -125,7 +130,7 @@ class _running():
                     _state.goalAngle = random.randint(100, 260)
                 _state.currAngle = 0
                 _state.startTime = currTime
-                _state.endTime = _state.startTime + 23
+                #_state.endTime = _state.startTime + 23
                 _state.newRotate = False
                 _state.scaredyBot.rotate(_state.turnDir)
 
