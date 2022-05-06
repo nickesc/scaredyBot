@@ -131,6 +131,7 @@ class _running():
                 _state.phase = _state.phases['waiting']
 
         elif _state.phase == _state.phases['waiting']:
+            time.sleep(.2)
             if currTime >= _state.endTime:
                 _state.phase = _state.phases['done']
 
