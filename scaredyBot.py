@@ -97,7 +97,15 @@ class ScaredyBot:
     def driveOne(bot, speed = 1, dir = 'forward'):
         return
 
-    def rotate(bot, dir, degrees = 90):
+    def rotate(bot, dir):
+
+
+        if dir == 'left':
+            x = 1
+        else:
+            x=-1
+
+        bot.create2.drive_direct(bot.baseSpeed*x,bot.baseSpeed*-1*x)
         return
 
     def checkAround(bot):

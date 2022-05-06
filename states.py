@@ -18,7 +18,7 @@ class _start():
 
     def enter(_state):
         print('entering', _state.scaredyBot.getState())
-        _state.scaredyBot.speed = 0
+        _state.scaredyBot.baseSpeed = 0
         time.sleep(.5)
 
     def execute(_state):
@@ -46,10 +46,11 @@ class _searching():
 
     def enter(_state):
         print('entering', _state.scaredyBot.getState())
-        _state.scaredyBot.speed = 75
+        _state.scaredyBot.baseSpeed = 75
         _state.scaredyBot.pir.light.green()
         _state.currDir = _state.scaredyBot.randDir()
         _state.botAngle = _state.scaredyBot.checkAngle()
+        _state.scaredyBot.rotate('left')
 
     def execute(_state):
         sense = _state.scaredyBot.getSensors(True)
@@ -71,7 +72,7 @@ class _running():
 
     def enter(_state):
         print('entering', _state.scaredyBot.getState())
-        _state.scaredyBot.speed = 250
+        _state.scaredyBot.baseSpeed = 250
         _state.scaredyBot.pir.light.red()
 
 
@@ -97,7 +98,7 @@ class _end():
 
     def enter(_state):
         print('entering', _state.scaredyBot.getState())
-        _state.scaredyBot.speed = 0
+        _state.scaredyBot.baseSpeed = 0
         _state.scaredyBot.stop()
         _state.exit()
 
