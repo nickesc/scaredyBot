@@ -136,6 +136,7 @@ class _running():
             if (currTime >= _state.endTime - 6) or _state.wall:
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['waiting']
+                _state.scaredyBot.pir.light.blue()
 
         elif _state.phase == _state.phases['waiting']:
             time.sleep(.2)
