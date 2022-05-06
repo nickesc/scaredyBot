@@ -83,7 +83,7 @@ class _running():
     #rightWall = False
 
     startTime = 0
-    endTime = 17
+    endTime = 18
 
     def __init__(_state, scaredyBot):
         _state.scaredyBot = scaredyBot
@@ -162,7 +162,7 @@ class _running():
 
             #if(scaredyBot)
 
-            if (currTime >= _state.endTime - 6):
+            if (currTime >= _state.endTime - 7):
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['waiting']
                 _state.scaredyBot.pir.light.blue()
