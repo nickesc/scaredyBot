@@ -101,6 +101,8 @@ class _running():
         currTime = time.time()
 
         print('phase',_state.phase)
+        print('goal', _state.goalAngle)
+        print('curr', _state.currAngle)
 
         if _state.phase == _state.phases['rotating']:
             if _state.currAngle >= _state.goalAngle:
