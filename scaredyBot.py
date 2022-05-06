@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 mac = False
-bot = False
+bot = True
 
 if mac:
     from motionDummy import PIR
@@ -13,8 +13,6 @@ if bot:
     from pycreate2 import Create2
 else:
     from create2Dummy import Create2
-
-
 
 
 from powerButton import PowerButton
@@ -124,6 +122,10 @@ class ScaredyBot:
     def checkMotion(bot):
         bot.motion = bot.pir.getMotion()
         return bot.motion
+
+    def checkAngle(bot):
+        bot.setSensors()
+        return bot.sensors.angle
 
     def destroy(bot):
         print("Quitting")

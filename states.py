@@ -66,7 +66,7 @@ class _running():
 
 
     def execute(_state):
-        time.sleep(4)
+        time.sleep(5)
         if _state.scaredyBot.looped<_state.scaredyBot.maxLoops:
             _state.scaredyBot.changeState(_searching(_state.scaredyBot))
             _state.scaredyBot.looped += 1
