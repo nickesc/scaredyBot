@@ -116,22 +116,17 @@ class ScaredyBot:
         bot.create2.drive_direct(bot.baseSpeed*x,bot.baseSpeed*-1*x)
         return
 
-    def checkBump(bot, update = True):
+    def checkBump(bot):
         bot.wall = False
         bot.wallLeft = False
         bot.wallRight = False
-        if update:
-            bump = bot.getSensors()['light_bumper']
-        else:
-            bump = bot.create2.get_sensors().light_bumper
-        if bump.left or bump.front_left:
+        bump = bot.getSensors()['light_bumper']
+        if bump.left or bump.front_left or bump.center_left:
             bot.wall = True
             bot.leftWall = True
-        if bump.front_right or bump.right:
+        if bump.center_right or bump.front_right or bump.right:
             bot.wall = True
             bot.rightWall = True
-        if bump.center_right or bump.center_left:
-            bot.wall = True
         return bump
 
     def runAway(bot):

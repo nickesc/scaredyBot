@@ -85,11 +85,11 @@ class PIR:
     def getMotionList(pir):
         return pir.motion
 
-    # def getSensors(pir, output = False):
-    #     data = {'motion': pir.getMotion()}
-    #     if (output):
-    #         print(data)
-    #     return (data)
+    def getSensors(pir,output = False):
+        data = {'motion': pir.getMotion()}
+        if (output):
+            print(data)
+        return (data)
 
     def cleanup(pir):
         pir.light.p_R.stop()
@@ -97,17 +97,17 @@ class PIR:
         pir.light.p_B.stop()
         destroy()
 
-def loop(pir):
-    while True:
-        print(pir.getMotion())
-        time.sleep(.1)
-
-if __name__ == '__main__':  # Program start from here
-
-    pir = PIR(27) # PIR motion pin = GPIO27 (BCM) / 13 (board)
-
-    try:
-        loop(pir)
-    except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-        pir.cleanup()
-        destroy()
+# def loop(pir):
+#     while True:
+#         pir.getSensors(output = True)
+#         time.sleep(.3)
+#
+# if __name__ == '__main__':  # Program start from here
+#
+#     pir = PIR(27) # PIR motion pin = GPIO27 (BCM) / 13 (board)
+#
+#     try:
+#         loop(pir)
+#     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
+#         pir.cleanup()
+#         destroy()
