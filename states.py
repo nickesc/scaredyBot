@@ -124,7 +124,7 @@ class _running():
                     _state.turnDir = _state.scaredyBot.randDir()
                     _state.goalAngle = random.randint(100, 260)
                 _state.startTime = currTime
-                _state.endTime = currTime + 23
+                _state.endTime = _state.startTime + 23
                 _state.newRotate = False
                 _state.scaredyBot.rotate(_state.turnDir)
 
