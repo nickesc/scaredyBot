@@ -17,18 +17,18 @@ class PIR:
 
         def __init__(light, rPin = 13, gPin = 19, bPin = 26):
 
-            r = rPin
-            g = gPin
-            b = bPin
+            light.r = rPin
+            light.g = gPin
+            light.b = bPin
 
             GPIO.setmode(GPIO.BCM)
-            GPIO.setup(r, GPIO.OUT)
-            GPIO.setup(g, GPIO.OUT)
-            GPIO.setup(b, GPIO.OUT)
+            GPIO.setup(light.r, GPIO.OUT)
+            GPIO.setup(light.g, GPIO.OUT)
+            GPIO.setup(light.b, GPIO.OUT)
 
-            light.p_R = GPIO.PWM(r, 2000)
-            light.p_G = GPIO.PWM(g, 2000)
-            light.p_B = GPIO.PWM(b, 2000)
+            light.p_R = GPIO.PWM(light.r, 2000)
+            light.p_G = GPIO.PWM(light.g, 2000)
+            light.p_B = GPIO.PWM(light.b, 2000)
             light.p_R.start(0)
             light.p_G.start(0)
             light.p_B.start(0)

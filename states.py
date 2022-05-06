@@ -21,7 +21,8 @@ class _start():
         time.sleep(.5)
 
     def execute(_state):
-        return
+        if _state.scaredyBot.ready == True:
+            _state.scaredyBot.changeState(_searching(_state.scaredyBot))
 
     def exit(_state):
         print('exiting', _state.scaredyBot.getState())

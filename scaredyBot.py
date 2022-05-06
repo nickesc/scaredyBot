@@ -8,6 +8,7 @@ except:
     from motionDummy import PIR
 from create2Dummy import Create2
 
+from powerButton import PowerButton
 import sys
 import time
 from copy import deepcopy
@@ -25,100 +26,104 @@ class ScaredyBot:
     looped = 0
     maxLoops = 10
 
-    def __init__(self, tty):
-        self.state = _start(self)
-        self.state.enter()
+    ready = False
 
-        self.botPort = tty  # where is your serial port?
-        self.create2 = Create2(self.botPort)
-        self.pir = PIR()
+    def __init__(bot, tty):
+        bot.state = _start(bot)
+        bot.state.enter()
 
-        self.create2.start()
-        self.create2.safe()
+        bot.botPort = tty  # where is your serial port?
+        bot.create2 = Create2(bot.botPort)
+        bot.pir = PIR()
 
-        self.sensors = {'motion':False}
-        self.setSensors()
+        bot.create2.start()
+        bot.create2.safe()
 
-        self.changeState(_searching(self))
+        bot.sensors = {'motion':False}
+        bot.setSensors()
 
-        self.loop()
+        #bot.changeState(_searching(bot))
 
-    def changeState(self, state):
-        self.state.exit()
-        self.state = state
-        self.state.enter()
+        bot.power = PowerButton(bot)
 
-    def loop(self):
-        self.state.execute()
+        bot.loop()
+
+    def changeState(bot, state):
+        bot.state.exit()
+        bot.state = state
+        bot.state.enter()
+
+    def loop(bot):
+        bot.state.execute()
         time.sleep(.01)
-        self.loop()
+        bot.loop()
 
 
-    def getState(self):
-        return self.state.getName()
+    def getState(bot):
+        return bot.state.getName()
 
-    def stop(self):
-        self.create2.drive_stop()
+    def stop(bot):
+        bot.create2.drive_stop()
 
     # driving the bot - speed between 0 & 3; direction is 'forward' or 'back'
-    def drive(self, speed = 1, dir = 'forward'):
+    def drive(bot, speed = 1, dir = 'forward'):
         return
 
-    def driveUntilWall(self, speed, direction = 'forward'):
+    def driveUntilWall(bot, speed, direction = 'forward'):
 
-        speed=speed*self.baseSpeed
+        speed=speed*bot.baseSpeed
 
         if direction=="back":
             speed = speed*-1
 
-        self.create2.drive_direct(speed, speed)
+        bot.create2.drive_direct(speed, speed)
         noWall = True
         while noWall:
-            sensors = self.create2.get_sensors()
+            sensors = bot.create2.get_sensors()
             bump = sensors.light_bumper
             if bump.front_left or bump.front_right:
-                self.create2.drive_stop()
+                bot.create2.drive_stop()
                 noWall = False
 
-    def driveOne(self, speed = 1, dir = 'forward'):
+    def driveOne(bot, speed = 1, dir = 'forward'):
         return
 
-    def rotate(self, dir, degrees = 90):
+    def rotate(bot, dir, degrees = 90):
         return
 
-    def checkAround(self):
+    def checkAround(bot):
         return
 
-    def runAway(self):
+    def runAway(bot):
         return
 
-    def setSensors(self):
+    def setSensors(bot):
         try:
-            self.sensors = self.create2.get_sensors()
-            self.motion = self.pir.getMotion()
+            bot.sensors = bot.create2.get_sensors()
+            bot.motion = bot.pir.getMotion()
             return True
         except:
             return False
 
-    def getSensors(self, output = False):
-        self.setSensors()
+    def getSensors(bot, output = False):
+        bot.setSensors()
 
         if output:
-            print(self.sensors, "\nMotion:", self.motion)
+            print(bot.sensors, "\nMotion:", bot.motion)
 
-        return self.sensors
+        return bot.sensors
 
-    def checkMotion(self):
-        self.motion = self.pir.getMotion()
-        return self.motion
+    def checkMotion(bot):
+        bot.motion = bot.pir.getMotion()
+        return bot.motion
 
-    def destroy(self):
+    def destroy(bot):
         print("Quitting")
         try:
-            self.pir.cleanup()
+            bot.pir.cleanup()
         except:
             pass
-        self.create2.close()
+        bot.create2.close()
         sys.exit()
 
 if __name__ == '__main__':
