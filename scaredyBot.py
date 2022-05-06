@@ -1,17 +1,25 @@
 #!/usr/bin/env python3
 
-try:
+mac = False
+bot = False
+
+if mac:
+    from motionDummy import PIR
+else:
     import RPi.GPIO as GPIO
     from motion import PIR
-    #from pycreate2 import Create2
-except:
-    from motionDummy import PIR
-from create2Dummy import Create2
+
+if bot:
+    from pycreate2 import Create2
+else:
+    from create2Dummy import Create2
+
+
+
 
 from powerButton import PowerButton
 import sys
 import time
-from copy import deepcopy
 from states import _start, _searching, _running, _end
 
 port = '/dev/ttyUSB0'
