@@ -152,7 +152,7 @@ class _running():
         elif _state.phase == _state.phases['running']:
             bump = _state.scaredyBot.checkBump()
 
-            if (currTime >= _state.endTime - 7):
+            if (currTime >= _state.endTime - 10):
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['waiting']
                 _state.scaredyBot.pir.light.blue()
