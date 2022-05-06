@@ -24,8 +24,8 @@ class PowerButton:
             GPIO.add_event_detect(button.buttonPin, GPIO.FALLING, callback = button.endScaredyBot)
         except:
             pass
-        print("start!")
+        print("Power on!")
 
     def endScaredyBot(button, ev = None):
         button.scaredyBot.changeState(_end(button.scaredyBot))
-        print("start!")
+        print("Power off!")

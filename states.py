@@ -55,8 +55,8 @@ class _searching():
     def execute(_state):
         sense = _state.scaredyBot.getSensors(True)
         if(_state.scaredyBot.motion!=True):
-            print(_state.currDir, sense['angle'])
-
+            #print(_state.currDir, sense['angle'])
+            pass
         else:
             _state.scaredyBot.changeState(_running(_state.scaredyBot))
 
@@ -115,7 +115,7 @@ class _running():
 
             if _state.newRotate:
                 bump = _state.scaredyBot.checkBump()
-                print(bump)
+                #print(bump)
                 if _state.scaredyBot.wallRight and _state.scaredyBot.wallLeft == False:
                     _state.turnDir = 'left'
                     _state.goalAngle = random.randint(100,170)
@@ -164,7 +164,7 @@ class _running():
 
         elif _state.phase == _state.phases['waiting']:
 
-            print(_state.scaredyBot.checkMotion())
+            #print(_state.scaredyBot.checkMotion())
             bump = _state.scaredyBot.checkBump(False)
 
             if _state.scaredyBot.wall:
