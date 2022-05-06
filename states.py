@@ -124,6 +124,7 @@ class _running():
                 _state.startTime = currTime
                 _state.endTime = currTime + 23
                 _state.newRotate = False
+                _state.scaredyBot.rotate(_state.turnDir)
 
             if abs(_state.currAngle) >= _state.goalAngle:
                 _state.scaredyBot.stop()
