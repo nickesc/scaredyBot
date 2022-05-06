@@ -52,7 +52,7 @@ class _searching():
         _state.botAngle = _state.scaredyBot.checkAngle()
 
     def execute(_state):
-        sense = _state.scaredyBot.getSensors(False)
+        sense = _state.scaredyBot.getSensors(True)
         if(_state.scaredyBot.motion!=True):
             print(_state.currDir, _state.botAngle)
 

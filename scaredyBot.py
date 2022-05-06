@@ -109,6 +109,7 @@ class ScaredyBot:
     def setSensors(bot):
         try:
             bot.sensors = bot.create2.get_sensors()._asdict()
+            bot.sensors.BumpsAndWheelDrop = bot.sensors.BumpsAndWheelDrop._asdict()
             bot.motion = bot.pir.getMotion()
             return True
         except:
