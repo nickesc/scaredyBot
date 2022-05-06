@@ -76,7 +76,7 @@ class ScaredyBot:
 
     # driving the bot - speed between 0 & 3; direction is 'forward' or 'back'
     def drive(bot, speed = 1, dir = 'forward'):
-        speed = speed * bot.baseSpeed
+        speed = int(speed * bot.baseSpeed)
 
         if dir == "back":
             speed = speed * -1
