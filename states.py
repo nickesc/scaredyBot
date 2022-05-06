@@ -79,7 +79,7 @@ class _running():
     wall = False
 
     startTime = 0
-    endTime = 11
+    endTime = 17
 
     def __init__(_state, scaredyBot):
         _state.scaredyBot = scaredyBot
@@ -93,7 +93,7 @@ class _running():
         _state.goalAngle = random.randint(110,170)
 
         print('entering', _state.scaredyBot.getState())
-        _state.scaredyBot.baseSpeed = 250
+        _state.scaredyBot.baseSpeed = 350
         _state.scaredyBot.rotate(_state.turnDir)
         _state.scaredyBot.pir.light.red()
 
