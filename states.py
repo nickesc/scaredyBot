@@ -130,7 +130,7 @@ class _running():
                     _state.goalAngle = random.randint(100, 260)
                 _state.currAngle = 0
                 _state.startTime = currTime
-                #_state.endTime = _state.startTime + 23
+                _state.endTime = _state.endTime + 3
                 _state.newRotate = False
                 _state.scaredyBot.rotate(_state.turnDir)
 
