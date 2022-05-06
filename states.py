@@ -48,6 +48,7 @@ class _searching():
         print('entering', _state.scaredyBot.getState())
         time.sleep(5)
         _state.scaredyBot.baseSpeed = 75
+
         _state.scaredyBot.pir.light.green()
         _state.currDir = _state.scaredyBot.randDir()
         _state.botAngle = _state.scaredyBot.checkAngle()
