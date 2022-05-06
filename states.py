@@ -151,17 +151,6 @@ class _running():
 
         elif _state.phase == _state.phases['running']:
             bump = _state.scaredyBot.checkBump()
-            # print(bump)
-            # if not _state.scaredyBot.wall:
-            #     bump = _state.scaredyBot.getSensors()['light_bumper']
-            #     if bump.left or bump.front_left or bump.center_left:
-            #         _state.scaredyBot.wall = True
-            #         _state.scaredyBot.leftWall = True
-            #     if bump.center_right or bump.front_right or bump.right:
-            #         _state.scaredyBot.wall = True
-            #         _state.scaredyBot.rightWall = True
-
-            #if(scaredyBot)
 
             if (currTime >= _state.endTime - 7):
                 _state.scaredyBot.stop()
@@ -174,7 +163,13 @@ class _running():
 
 
         elif _state.phase == _state.phases['waiting']:
+            bump = _state.scaredyBot.checkBump()
+
+            if _state.scaredyBot.wall:
+                _state.newRotate = True
+                _state.phase = _state.phases['rotating']
             time.sleep(.2)
+
             if currTime >= _state.endTime:
                 _state.phase = _state.phases['done']
 
