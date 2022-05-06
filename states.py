@@ -77,6 +77,8 @@ class _running():
     currAngle = 0
 
     wall = False
+    leftWall = False
+    rightWall = False
 
     startTime = 0
     endTime = 17
@@ -123,8 +125,13 @@ class _running():
             if not _state.wall:
                 bump = _state.scaredyBot.getSensors()['light_bumper']
                 #print(bump)
-                if bump.front_left or bump.front_right:
+                if bump.left or bump.front_left or bump.center_left:
                     _state.wall = True
+                    _state.leftWall = True
+                if bump.center_right or bump.front_right or bump.right:
+                    _state.wall = True
+                    _state.rightWall = True
+
 
             if (currTime >= _state.endTime - 6) or _state.wall:
                 _state.scaredyBot.stop()

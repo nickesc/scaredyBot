@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import random
 from collections import namedtuple
-
+import json
 from powerButton import PowerButton
 import sys
 import time
@@ -131,7 +131,7 @@ class ScaredyBot:
         bot.setSensors()
 
         if output:
-            print(bot.sensors, "\nMotion:", bot.motion)
+            print(json.dumps(bot.sensors,sort_keys=True, indent=4), "\nMotion:", bot.motion)
 
         return bot.sensors
 
