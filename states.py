@@ -163,14 +163,14 @@ class _running():
 
 
         elif _state.phase == _state.phases['waiting']:
-            bump = _state.scaredyBot.checkBump(False)
-
-            if _state.scaredyBot.wall:
-                _state.scaredyBot.drive(dir = 'back')
-                time.sleep(.2)
-                _state.newRotate = True
-                _state.phase = _state.phases['rotating']
-            time.sleep(.2)
+            # bump = _state.scaredyBot.checkBump(False)
+            #
+            # if _state.scaredyBot.wall:
+            #     _state.scaredyBot.drive(dir = 'back')
+            #     time.sleep(.2)
+            #     _state.newRotate = True
+            #     _state.phase = _state.phases['rotating']
+            # time.sleep(.2)
 
             if currTime >= _state.endTime:
                 _state.phase = _state.phases['done']
