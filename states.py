@@ -166,6 +166,9 @@ class _running():
             bump = _state.scaredyBot.checkBump()
 
             if _state.scaredyBot.wall:
+                _state.scaredyBot.drive(dir = 'back')
+                time.sleep(.2)
+                _state.scaredyBot.stop()
                 _state.newRotate = True
                 _state.phase = _state.phases['rotating']
             time.sleep(.2)
