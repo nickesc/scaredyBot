@@ -135,7 +135,7 @@ class _running():
             if currTime >= _state.endTime:
                 _state.phase = _state.phases['done']
 
-        elif _state.phase == _state.phases['waiting']:
+        elif _state.phase == _state.phases['done']:
             if _state.scaredyBot.looped<_state.scaredyBot.maxLoops:
                 _state.scaredyBot.changeState(_searching(_state.scaredyBot))
                 _state.scaredyBot.looped += 1
