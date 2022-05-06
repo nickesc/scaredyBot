@@ -99,7 +99,7 @@ class PIR:
 
 def loop(pir):
     while True:
-        pir.getSensors(output = True)
+        print(pir.getMotion())
         time.sleep(.3)
 
 if __name__ == '__main__':  # Program start from here
