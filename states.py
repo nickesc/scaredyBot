@@ -106,7 +106,7 @@ class _running():
         print('curr', _state.currAngle)
 
         if _state.phase == _state.phases['rotating']:
-            if _state.currAngle >= _state.goalAngle:
+            if abs(_state.currAngle) >= _state.goalAngle:
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['running']
                 _state.startTime = currTime
