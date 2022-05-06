@@ -127,6 +127,8 @@ class ScaredyBot:
         if bump.front_right or bump.right:
             bot.wall = True
             bot.rightWall = True
+        if bump.center_right or bump.center_left:
+            bot.wall = True
         return bump
 
     def runAway(bot):
