@@ -63,9 +63,9 @@ class ScaredyBot:
         bot.state.enter()
 
     def loop(bot):
-        bot.state.execute()
-        time.sleep(.01)
-        bot.loop()
+        while True:
+            bot.state.execute()
+            time.sleep(.01)
 
 
     def getState(bot):
