@@ -163,6 +163,8 @@ class _running():
 
 
         elif _state.phase == _state.phases['waiting']:
+
+            print(_state.scaredyBot.checkMotion())
             # bump = _state.scaredyBot.checkBump(False)
             #
             # if _state.scaredyBot.wall:
