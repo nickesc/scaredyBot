@@ -111,7 +111,6 @@ class _running():
 
         if _state.phase == _state.phases['rotating']:
             if _state.firstRotate == True:
-                _state.firstRotate = False
                 _state.endTime = _state.endTime + currTime
 
             if _state.newRotate:
@@ -136,6 +135,7 @@ class _running():
                     _state.scaredyBot.drive(dir = 'back')
                     time.sleep(.2)
                     _state.scaredyBot.stop()
+                _state.firstRotate = False
                 _state.scaredyBot.rotate(_state.turnDir)
 
             if abs(_state.currAngle) >= _state.goalAngle:
