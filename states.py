@@ -97,7 +97,7 @@ class _running():
         _state.goalAngle = random.randint(100,260)
 
         print('entering', _state.scaredyBot.getState())
-        _state.scaredyBot.baseSpeed = 400
+        _state.scaredyBot.baseSpeed = 350
         _state.scaredyBot.pir.light.red()
 
 
