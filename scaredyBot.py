@@ -34,6 +34,10 @@ class ScaredyBot:
 
     ready = False
 
+    wall = False
+    wallLeft = False
+    wallRight = False
+
     def __init__(bot, tty):
         bot.state = _start(bot)
         bot.state.enter()
@@ -112,8 +116,15 @@ class ScaredyBot:
         bot.create2.drive_direct(bot.baseSpeed*x,bot.baseSpeed*-1*x)
         return
 
-    def checkAround(bot):
-        return
+    def checkBump(bot):
+        bump = bot.getSensors()['light_bumper']
+        if bump.left or bump.front_left or bump.center_left:
+            bot.wall = True
+            bot.leftWall = True
+        if bump.center_right or bump.front_right or bump.right:
+            bot.wall = True
+            bot.rightWall = True
+        return bump
 
     def runAway(bot):
         return

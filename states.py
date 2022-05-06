@@ -76,9 +76,9 @@ class _running():
     goalAngle = 120
     currAngle = 0
 
-    wall = False
-    leftWall = False
-    rightWall = False
+    #wall = False
+    #leftWall = False
+    #rightWall = False
 
     startTime = 0
     endTime = 17
@@ -104,7 +104,7 @@ class _running():
         currTime = time.time()
 
         print('phase',_state.phase)
-        print('wall', _state.wall)
+        print('wall', _state.scaredyBot.wall, _state.scaredyBot.leftWall, _state.scaredyBot.rightWall)
         print('curr', currTime)
         print('end', _state.endTime)
 
@@ -120,20 +120,20 @@ class _running():
                 _state.currAngle += _state.scaredyBot.checkAngle()
 
         elif _state.phase == _state.phases['running']:
-            bump = _state.scaredyBot.getSensors()['light_bumper']
-            print(bump)
-            if not _state.wall:
-                bump = _state.scaredyBot.getSensors()['light_bumper']
-                #print(bump)
-                if bump.left or bump.front_left or bump.center_left:
-                    _state.wall = True
-                    _state.leftWall = True
-                if bump.center_right or bump.front_right or bump.right:
-                    _state.wall = True
-                    _state.rightWall = True
+            bump = _state.scaredyBot.checkBump()
+            # print(bump)
+            # if not _state.scaredyBot.wall:
+            #     bump = _state.scaredyBot.getSensors()['light_bumper']
+            #     if bump.left or bump.front_left or bump.center_left:
+            #         _state.scaredyBot.wall = True
+            #         _state.scaredyBot.leftWall = True
+            #     if bump.center_right or bump.front_right or bump.right:
+            #         _state.scaredyBot.wall = True
+            #         _state.scaredyBot.rightWall = True
 
+            #if(scaredyBot)
 
-            if (currTime >= _state.endTime - 6) or _state.wall:
+            if (currTime >= _state.endTime - 6) or _state.scaredyBot.wall:
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['waiting']
                 _state.scaredyBot.pir.light.blue()
