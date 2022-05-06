@@ -72,6 +72,7 @@ class _running():
 
     def enter(_state):
         print('entering', _state.scaredyBot.getState())
+        _state.scaredyBot.stop()
         _state.scaredyBot.baseSpeed = 250
         _state.scaredyBot.pir.light.red()
 
