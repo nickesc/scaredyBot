@@ -104,10 +104,10 @@ class _running():
     def execute(_state):
         currTime = time.time()
 
-        print('phase',_state.phase)
-        print('wall', _state.scaredyBot.wall, _state.scaredyBot.wallLeft, _state.scaredyBot.wallRight)
-        print('curr', currTime)
-        print('end', _state.endTime)
+        #print('phase',_state.phase)
+        #print('wall', _state.scaredyBot.wall, _state.scaredyBot.wallLeft, _state.scaredyBot.wallRight)
+        #print('curr', currTime)
+        #print('end', _state.endTime)
 
         if _state.phase == _state.phases['rotating']:
             if _state.firstRotate == True:
@@ -152,7 +152,7 @@ class _running():
         elif _state.phase == _state.phases['running']:
             bump = _state.scaredyBot.checkBump()
 
-            if (currTime >= _state.endTime - 7):
+            if (currTime >= _state.endTime - 10):
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['waiting']
                 _state.scaredyBot.pir.light.blue()
