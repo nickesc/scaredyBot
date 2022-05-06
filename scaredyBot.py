@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
+import random
+from powerButton import PowerButton
+import sys
+import time
+from states import _start, _searching, _running, _end
 
 mac = False
 bot = True
-
 if mac:
     from motionDummy import PIR
 else:
@@ -13,12 +17,6 @@ if bot:
     from pycreate2 import Create2
 else:
     from create2Dummy import Create2
-
-
-from powerButton import PowerButton
-import sys
-import time
-from states import _start, _searching, _running, _end
 
 port = '/dev/ttyUSB0'
 
@@ -53,6 +51,9 @@ class ScaredyBot:
         bot.power = PowerButton(bot)
 
         bot.loop()
+
+    def randDir(self):
+        return random.choice(['left', 'right'])
 
     def changeState(bot, state):
         bot.state.exit()
@@ -124,7 +125,7 @@ class ScaredyBot:
         return bot.motion
 
     def checkAngle(bot):
-        bot.setSensors()
+        #bot.setSensors()
         return bot.sensors.angle
 
     def destroy(bot):
@@ -138,7 +139,7 @@ class ScaredyBot:
 
 if __name__ == '__main__':
 
-    scaredyBot = ScaredyBot('/dev/ttyUSB0')
+    scaredyBot = ScaredyBot(port)
     # try:
     #     print(scaredyBot.checkMotion())
     #     time.sleep(.1)

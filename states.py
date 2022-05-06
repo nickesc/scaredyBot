@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import random
 
 try:
     import RPi.GPIO as GPIO
@@ -30,6 +31,13 @@ class _start():
 
 class _searching():
 
+    botAngle=0
+
+    currAngle = 90
+    currDir = 'left'
+    goalAngle = currAngle
+    angleChange = 45
+
     def __init__(_state, scaredyBot):
         _state.scaredyBot = scaredyBot
 
@@ -40,11 +48,13 @@ class _searching():
         print('entering', _state.scaredyBot.getState())
         _state.scaredyBot.speed = 75
         _state.scaredyBot.pir.light.green()
+        _state.currDir = _state.scaredyBot.randDir()
+        _state.botAngle = _state.scaredyBot.checkAngle()
 
     def execute(_state):
-        sense = _state.scaredyBot.getSensors(True)
+        sense = _state.scaredyBot.getSensors(False)
         if(_state.scaredyBot.motion!=True):
-            pass
+            print(_state.currDir, _state.botAngle)
 
         else:
             _state.scaredyBot.changeState(_running(_state.scaredyBot))
