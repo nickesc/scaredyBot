@@ -69,7 +69,7 @@ class _running():
     phase = 'rotating'
 
     firstRotate = True
-    newRotate = False
+    newRotate = True
     rotating = True
     running = False
     waiting = False
@@ -123,18 +123,19 @@ class _running():
 
                 if _state.scaredyBot.wallRight == False and _state.scaredyBot.wallLeft:
                     _state.turnDir = 'right'
-                    _state.goalAngle = random.randint(170, 260)
+                    _state.goalAngle = random.randint(330, 280)
 
                 if _state.scaredyBot.wallRight and _state.scaredyBot.wallLeft:
                     _state.turnDir = _state.scaredyBot.randDir()
-                    _state.goalAngle = random.randint(100, 260)
+                    _state.goalAngle = random.randint(30, 80)
                 _state.currAngle = 0
                 _state.startTime = currTime
                 _state.endTime = _state.endTime + 3
                 _state.newRotate = False
-                _state.scaredyBot.drive(dir = 'back')
-                time.sleep(.2)
-                _state.scaredyBot.stop()
+                if _state.firstRotate == False:
+                    _state.scaredyBot.drive(dir = 'back')
+                    time.sleep(.2)
+                    _state.scaredyBot.stop()
                 _state.scaredyBot.rotate(_state.turnDir)
 
             if abs(_state.currAngle) >= _state.goalAngle:
