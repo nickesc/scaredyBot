@@ -121,10 +121,10 @@ class ScaredyBot:
         bot.wallLeft = False
         bot.wallRight = False
         bump = bot.getSensors()['light_bumper']
-        if bump.left or bump.front_left or bump.center_left:
+        if bump.left or bump.front_left:
             bot.wall = True
             bot.leftWall = True
-        if bump.center_right or bump.front_right or bump.right:
+        if bump.front_right or bump.right:
             bot.wall = True
             bot.rightWall = True
         return bump
