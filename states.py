@@ -68,6 +68,7 @@ class _running():
     phases = {'rotating':'rotating','running':'running','waiting':'waiting', 'done':'done'}
     phase = 'rotating'
 
+    newRotate = True
     rotating = True
     running = False
     waiting = False
@@ -92,11 +93,10 @@ class _running():
     def enter(_state):
 
         _state.turnDir = _state.scaredyBot.randDir()
-        _state.goalAngle = random.randint(110,170)
+        _state.goalAngle = random.randint(100,260)
 
         print('entering', _state.scaredyBot.getState())
         _state.scaredyBot.baseSpeed = 500
-        _state.scaredyBot.rotate(_state.turnDir)
         _state.scaredyBot.pir.light.red()
 
 
@@ -109,6 +109,22 @@ class _running():
         print('end', _state.endTime)
 
         if _state.phase == _state.phases['rotating']:
+            if _state.newRotate:
+                bump = _state.scaredyBot.checkBump()
+                if _state.scaredyBot.wallRight and _state.scaredyBot.wallLeft == False:
+                    _state.turnDir = 'left'
+                    _state.goalAngle = random.randint(100,170)
+
+                if _state.scaredyBot.wallRight == False and _state.scaredyBot.wallLeft:
+                    _state.turnDir = 'right'
+                    _state.goalAngle = random.randint(170, 260)
+                if _state.scaredyBot.wallRight and _state.scaredyBot.wallLeft:
+                    _state.turnDir = _state.scaredyBot.randDir()
+                    _state.goalAngle = random.randint(100, 260)
+                _state.startTime = currTime
+                _state.endTime = currTime + 23
+                _state.newRotate = False
+
             if abs(_state.currAngle) >= _state.goalAngle:
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['running']
@@ -133,10 +149,15 @@ class _running():
 
             #if(scaredyBot)
 
-            if (currTime >= _state.endTime - 6) or _state.scaredyBot.wall:
+            if (currTime >= _state.endTime - 6):
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['waiting']
                 _state.scaredyBot.pir.light.blue()
+
+            if _state.scaredyBot.wall:
+                _state.newRotate = True
+                _state.phase = _state.phases['rotating']
+
 
         elif _state.phase == _state.phases['waiting']:
             time.sleep(.2)
