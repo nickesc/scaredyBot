@@ -76,6 +76,7 @@ class _running():
     goalAngle = 120
     currAngle = 0
 
+    noWall = True
 
     startTime = 0
     endTime = 11
@@ -115,17 +116,22 @@ class _running():
             elif _state.currAngle < _state.goalAngle:
                 _state.currAngle += _state.scaredyBot.checkAngle()
 
-        if _state.phase == _state.phases['running']:
-            if _state.endTime - 6 == currTime:
+        elif _state.phase == _state.phases['running']:
+
+            if _state.noWall:
+                bump = _state.scaredyBot.getSensors()['light_bumper']
+                if bump.front_left or bump.front_right:
+                    noWall = False
+
+            if (_state.endTime - 6 == currTime) or _state.noWall == False:
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['waiting']
 
-
-        if _state.phase == _state.phases['waiting']:
+        elif _state.phase == _state.phases['waiting']:
             if currTime >= _state.endTime:
                 _state.phase = _state.phases['done']
 
-        if _state.phase == _state.phases['waiting']:
+        elif _state.phase == _state.phases['waiting']:
             if _state.scaredyBot.looped<_state.scaredyBot.maxLoops:
                 _state.scaredyBot.changeState(_searching(_state.scaredyBot))
                 _state.scaredyBot.looped += 1

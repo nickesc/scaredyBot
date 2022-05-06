@@ -81,14 +81,6 @@ class ScaredyBot:
         if dir == "back":
             speed = speed * -1
 
-        bot.create2.drive_direct(speed, speed)
-        noWall = True
-        while noWall:
-            sensors = bot.create2.get_sensors()
-            bump = sensors.light_bumper
-            if bump.front_left or bump.front_right:
-                bot.create2.drive_stop()
-                noWall = False
 
     def driveUntilWall(bot, speed, direction = 'forward'):
 
