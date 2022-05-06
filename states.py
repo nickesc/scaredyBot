@@ -114,7 +114,7 @@ class _running():
                 _state.endTime += currTime
                 _state.scaredyBot.drive(speed = .5)
 
-            elif _state.currAngle < _state.goalAngle:
+            elif abs(_state.currAngle) < _state.goalAngle:
                 _state.currAngle += _state.scaredyBot.checkAngle()
 
         elif _state.phase == _state.phases['running']:
