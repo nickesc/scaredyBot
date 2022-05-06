@@ -69,7 +69,7 @@ class _running():
     phase = 'rotating'
 
     firstRotate = True
-    newRotate = True
+    newRotate = False
     rotating = True
     running = False
     waiting = False
