@@ -121,8 +121,9 @@ class _running():
 
             if not _state.wall:
                 bump = _state.scaredyBot.getSensors()['light_bumper']
+                print(bump)
                 if bump.front_left or bump.front_right:
-                    noWall = False
+                    _state.wall = True
 
             if (_state.endTime - 6 >= currTime) or _state.wall:
                 _state.scaredyBot.stop()
