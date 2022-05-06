@@ -65,7 +65,9 @@ class _searching():
 
 class _running():
 
-    initialTurnDir = 'left'
+    turnDir = 'left'
+    goalAngle = 120
+    currAngle = 0
 
     def __init__(_state, scaredyBot):
         _state.scaredyBot = scaredyBot
@@ -75,17 +77,21 @@ class _running():
 
     def enter(_state):
 
-        _state.initialTurnDir = _state.scaredyBot.randDir()
-
+        _state.turnDir = _state.scaredyBot.randDir()
+        _state.goalAngle = random.randint(110,170)
 
         print('entering', _state.scaredyBot.getState())
         _state.scaredyBot.baseSpeed = 250
-        _state.scaredyBot.rotate(_state.initialTurnDir)
+        _state.scaredyBot.rotate(_state.turnDir)
         _state.scaredyBot.pir.light.red()
 
 
     def execute(_state):
-        time.sleep(6)
+
+        if _state.currAngle >= _state.goalAngle:
+            _state.scaredyBot.stop()
+
+
         if _state.scaredyBot.looped<_state.scaredyBot.maxLoops:
             _state.scaredyBot.changeState(_searching(_state.scaredyBot))
             _state.scaredyBot.looped += 1
@@ -94,6 +100,7 @@ class _running():
         return
 
     def exit(_state):
+        time.sleep(6)
         print('exiting', _state.scaredyBot.getState())
 
 class _end():
