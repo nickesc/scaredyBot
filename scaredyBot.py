@@ -45,7 +45,7 @@ class ScaredyBot:
         bot.create2.start()
         bot.create2.safe()
 
-        bot.sensors = namedtuple("angle","0")
+        bot.sensors = {'angle':0}
         bot.setSensors()
 
         #bot.changeState(_searching(bot))
@@ -108,7 +108,7 @@ class ScaredyBot:
 
     def setSensors(bot):
         try:
-            bot.sensors = bot.create2.get_sensors()
+            bot.sensors = bot.create2.get_sensors()._asdict()
             bot.motion = bot.pir.getMotion()
             return True
         except:
@@ -128,7 +128,7 @@ class ScaredyBot:
 
     def checkAngle(bot):
         #bot.setSensors()
-        return bot.sensors.angle
+        return bot.sensors['angle']
 
     def destroy(bot):
         print("Quitting")
