@@ -80,7 +80,7 @@ class ScaredyBot:
 
         if dir == "back":
             speed = speed * -1
-
+        bot.create2.drive_direct(speed, speed)
 
     def driveUntilWall(bot, speed, direction = 'forward'):
 

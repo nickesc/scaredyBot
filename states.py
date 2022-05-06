@@ -124,7 +124,7 @@ class _running():
                 if bump.front_left or bump.front_right:
                     noWall = False
 
-            if (_state.endTime - 6 == currTime) or _state.wall:
+            if (_state.endTime - 6 >= currTime) or _state.wall:
                 _state.scaredyBot.stop()
                 _state.phase = _state.phases['waiting']
 
