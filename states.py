@@ -134,7 +134,6 @@ class _running():
             #return
 
     def exit(_state):
-        time.sleep(6)
         print('exiting', _state.scaredyBot.getState())
 
 class _end():

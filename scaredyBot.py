@@ -148,7 +148,7 @@ class ScaredyBot:
         return bot.motion
 
     def checkAngle(bot):
-        #bot.setSensors()
+        bot.setSensors()
         return bot.sensors['angle']
 
     def destroy(bot):
