@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import random
+from collections import namedtuple
+
 from powerButton import PowerButton
 import sys
 import time
@@ -43,7 +45,7 @@ class ScaredyBot:
         bot.create2.start()
         bot.create2.safe()
 
-        bot.sensors = {'motion':False}
+        bot.sensors = namedtuple("angle","0")
         bot.setSensors()
 
         #bot.changeState(_searching(bot))
@@ -126,7 +128,7 @@ class ScaredyBot:
 
     def checkAngle(bot):
         #bot.setSensors()
-        return bot.sensors['angle']
+        return bot.sensors.angle
 
     def destroy(bot):
         print("Quitting")
