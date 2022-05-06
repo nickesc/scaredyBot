@@ -119,6 +119,7 @@ class _running():
                 if _state.scaredyBot.wallRight == False and _state.scaredyBot.wallLeft:
                     _state.turnDir = 'right'
                     _state.goalAngle = random.randint(170, 260)
+
                 if _state.scaredyBot.wallRight and _state.scaredyBot.wallLeft:
                     _state.turnDir = _state.scaredyBot.randDir()
                     _state.goalAngle = random.randint(100, 260)
