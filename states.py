@@ -145,8 +145,12 @@ class _running():
 
         elif _state.phase == _state.phases['done']:
             if _state.scaredyBot.looped<_state.scaredyBot.maxLoops:
-                _state.scaredyBot.changeState(_searching(_state.scaredyBot))
+                _state.scaredyBot.wall = False
+                _state.scaredyBot.wallLeft = False
+                _state.scaredyBot.wallRight = False
                 _state.scaredyBot.looped += 1
+                _state.scaredyBot.changeState(_searching(_state.scaredyBot))
+
             else:
                 _state.scaredyBot.changeState(_end(_state.scaredyBot))
             #return
