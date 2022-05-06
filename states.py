@@ -111,6 +111,7 @@ class _running():
         if _state.phase == _state.phases['rotating']:
             if _state.newRotate:
                 bump = _state.scaredyBot.checkBump()
+                print(bump)
                 if _state.scaredyBot.wallRight and _state.scaredyBot.wallLeft == False:
                     _state.turnDir = 'left'
                     _state.goalAngle = random.randint(100,170)
