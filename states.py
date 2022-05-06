@@ -104,7 +104,7 @@ class _running():
         currTime = time.time()
 
         print('phase',_state.phase)
-        print('wall', _state.scaredyBot.wall, _state.scaredyBot.leftWall, _state.scaredyBot.rightWall)
+        print('wall', _state.scaredyBot.wall, _state.scaredyBot.wallLeft, _state.scaredyBot.wallRight)
         print('curr', currTime)
         print('end', _state.endTime)
 
