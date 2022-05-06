@@ -64,6 +64,9 @@ class _searching():
         print('exiting', _state.scaredyBot.getState())
 
 class _running():
+
+    initialTurnDir = 'left'
+
     def __init__(_state, scaredyBot):
         _state.scaredyBot = scaredyBot
 
@@ -71,9 +74,13 @@ class _running():
         return "running"
 
     def enter(_state):
+
+        _state.initialTurnDir = _state.scaredyBot.randDir()
+
+
         print('entering', _state.scaredyBot.getState())
-        _state.scaredyBot.rotate('left')
         _state.scaredyBot.baseSpeed = 250
+        _state.scaredyBot.rotate(_state.initialTurnDir)
         _state.scaredyBot.pir.light.red()
 
 
