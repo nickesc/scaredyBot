@@ -85,11 +85,11 @@ class PIR:
     def getMotionList(pir):
         return pir.motion
 
-    def getSensors(pir,output = False):
-        data = {'motion': pir.getMotion()}
-        if (output):
-            print(data)
-        return (data)
+    # def getSensors(pir, output = False):
+    #     data = {'motion': pir.getMotion()}
+    #     if (output):
+    #         print(data)
+    #     return (data)
 
     def cleanup(pir):
         pir.light.p_R.stop()
