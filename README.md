@@ -116,7 +116,7 @@ class _state():
       4. here, the rest is pretty simple:
          1. we remove the wall end condition and make it always run for a certain amount of time, rotating and running away from obstacles when it reaches them, and spend a good deal of time debugging this
          2. we also tell ScaredyBot to back up a little if it senses a bump while `waiting` and turn around. This makes him less idle and just waiting, and like he's still trying to avoid you when you walk up to him
-      5. The project is basically finished, when ScaredyBot runs over a metal bump on the floor and screws up his motion sensor. I spend hours debugging, but am not able to fully fix it. ScaredyBot is, unfortuantely, never the same
+      5. The project is basically finished, when ScaredyBot runs over a metal bump on the floor and screws up his motion sensor. I spend hours debugging, but am not able to fully fix it. ScaredyBot is, unfortunately, never the same. Read *section 5. Challenges* for more information on this.
          1. But he still works! It just took a few tries.
          2. [Video one of the final stage](https://drive.google.com/file/d/1lP1P-42ooJOhF5uGC8GoanMYOg7aiPAC/view?usp=sharing)
          3. [Video two of the final stage](https://drive.google.com/file/d/15bHUwT_oJJtBaSlm4elB4OfEUVbIKJoP/view?usp=sharing)
