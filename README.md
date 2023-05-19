@@ -8,7 +8,7 @@ a [`Raspberry Pi`](https://www.raspberrypi.com/).*
 
 ###### COMP 349: Robotics
 
-###### [Videos](https://drive.google.com/drive/folders/1hUl7qcqlOvjXQzaLcYq3QibzHZxcoDM1?usp=sharing) | [Github: `nickesc/scaredyBot`](https://github.com/nickesc/scaredyBot)
+###### [Videos - Youtube Playlist](https://www.youtube.com/playlist?list=PLho88501Id589K8-wNbT3rDAXDpDAtRPi) | [Github: `nickesc/scaredyBot`](https://github.com/nickesc/scaredyBot)
 
 ------
 
@@ -138,7 +138,7 @@ happened after prelab testing*
 > because I liked his eyes
 
 5. at the end of the night though, we have mostly finished with our sensors and are ready to move onto the robot
-    1. [Video of testing motion detection with output at this stage](https://drive.google.com/file/d/10asBjgjwoHYMwey8_Bq01dDAC0ZplnpV/view?usp=sharing)
+    1. [Video of testing motion detection with output at this stage](https://youtu.be/ROyamXtTEis)
 
 #### 4.3 Making ScaredyBot
 
@@ -197,7 +197,7 @@ class _state():
         3. `waiting` the cooldown period for the motion sensor (about 6 seconds) where the roomba needs to be stationary
            to reset
     4. from here, we have a robot that will run until it hits a wall or for a few seconds anytime it detects motion
-        1. [Video of this stage](https://drive.google.com/file/d/1-UBnOioYR3tijqwtAUgPi-zkTxlGM-rA/view?usp=sharing)
+        1. [Video of the robot bumping into walls](https://youtu.be/NTDA_mw3j0Y)
 9. here, the rest is pretty simple:
     1. I remove the wall end condition and make it always run for a certain amount of time, rotating and running
        away from obstacles when it reaches them, and spend a good deal of time debugging this
@@ -208,8 +208,8 @@ class _state():
        Read
        **section 5. Challenges** for more information on this
         1. But he still works! It just took a few tries
-        2. [Video one of the final stage](https://drive.google.com/file/d/1lP1P-42ooJOhF5uGC8GoanMYOg7aiPAC/view?usp=sharing)
-        3. [Video two of the final stage](https://drive.google.com/file/d/15bHUwT_oJJtBaSlm4elB4OfEUVbIKJoP/view?usp=sharing)
+        2. [Video of the robot running away from me - stationary camera](https://youtu.be/S3aMpf-OjHE)
+        3. [Video of the robot running away from me - following camera](https://youtu.be/pI4YezapVw4)
 
 > ![wiringFront](img/wiringFront.png)
 > **img 4.3.1**: final wiring for ScaredyBot, front view
